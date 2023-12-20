@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CategoryApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/categories', [CategoryApiController::class, 'index'])->name('categories_api');
+Route::get('/categories/{id}', [CategoryApiController::class, 'show'])->name('categories_show_api');
