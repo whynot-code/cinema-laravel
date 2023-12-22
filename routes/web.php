@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,4 +33,11 @@ Route::post('/categories/store', [CategoryController::class, 'store'])->name('ca
 Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories_edit');
 Route::put('/categories/{id}/update', [CategoryController::class, 'update'])->name('categories_update');
 Route::delete('/categories/{id}/destroy', [CategoryController::class, 'destroy'])->name('categories_destroy');
+
+Route::get('/movies', [MovieController::class, 'index'])->name('movies_index');
+Route::get('/movies/create', [MovieController::class, 'create'])->name('movies_create');
+Route::post('/movies/store', [MovieController::class, 'store'])->name('movies_store');
+Route::get('/movies/{id}/edit', [MovieController::class, 'edit'])->name('movies_edit');
+Route::put('/movies/{id}/update', [MovieController::class, 'update'])->name('movies_update');
+Route::delete('/movies/{id}/destroy', [MovieController::class, 'destroy'])->name('movies_destroy');
 
