@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryStoreRequest;
+use App\Http\Requests\CategoryUpdateRequest;
 use App\Models\Category;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
@@ -30,7 +32,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(CategoryStoreRequest $request): RedirectResponse
     {
         $category = new Category();
 
@@ -56,7 +58,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id): RedirectResponse
+    public function update(CategoryUpdateRequest $request, string $id): RedirectResponse
     {
         $category = Category::find($id);
 
@@ -74,8 +76,15 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
 
-        $category->delete();
+        if ($category->movies()->exists()) {
+            return redirect()
+                ->route('categories')
+                ->with('status', 'Cannot delete Category beacuse contains Movies.');
+        } 
 
-        return redirect()->route('categories');
+        $category->delete();
+        return redirect()
+            ->route('categories')
+            ->with('status', 'Category deleted!');
     }
 }

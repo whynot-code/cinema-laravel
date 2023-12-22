@@ -6,6 +6,9 @@
         @method('PUT')
     
         <input type="text" name="name" value="{{ $category->name }}">
+        @error('name') 
+            <p style="color: red; position: absolute;">{{ $errors->first('name') }}</p>
+        @enderror
         <button type="submit">Edytuj</button>
     </form>
 @endsection

@@ -126,6 +126,12 @@
     </div>
 
     <section class="content">
+      @if (session('status'))
+        <div class="">
+            {{ session('status') }}
+        </div>
+      @endif
+
       @yield('page_content')
     </section>
   </div>
