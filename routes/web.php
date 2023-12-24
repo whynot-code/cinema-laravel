@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,4 +41,11 @@ Route::post('/movies/store', [MovieController::class, 'store'])->name('movies_st
 Route::get('/movies/{id}/edit', [MovieController::class, 'edit'])->name('movies_edit');
 Route::put('/movies/{id}/update', [MovieController::class, 'update'])->name('movies_update');
 Route::delete('/movies/{id}/destroy', [MovieController::class, 'destroy'])->name('movies_destroy');
+
+Route::get('/rooms', [RoomController::class, 'index'])->name('rooms_index');
+Route::get('/rooms/create', [RoomController::class, 'create'])->name('rooms_create');
+Route::post('/rooms/store', [RoomController::class, 'store'])->name('rooms_store');
+Route::get('/rooms/{id}/edit', [RoomController::class, 'edit'])->name('rooms_edit');
+Route::put('/rooms/{id}/update', [RoomController::class, 'update'])->name('rooms_update');
+Route::delete('/rooms/{id}/destroy', [RoomController::class, 'destroy'])->name('rooms_destroy');
 
