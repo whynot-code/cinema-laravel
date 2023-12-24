@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\RepertoiresController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,4 +49,11 @@ Route::post('/rooms/store', [RoomController::class, 'store'])->name('rooms_store
 Route::get('/rooms/{id}/edit', [RoomController::class, 'edit'])->name('rooms_edit');
 Route::put('/rooms/{id}/update', [RoomController::class, 'update'])->name('rooms_update');
 Route::delete('/rooms/{id}/destroy', [RoomController::class, 'destroy'])->name('rooms_destroy');
+
+Route::get('/repertoires', [RepertoiresController::class, 'index'])->name('repertoires_index');
+Route::get('/repertoires/create', [RepertoiresController::class, 'create'])->name('repertoires_create');
+Route::post('/repertoires/store', [RepertoiresController::class, 'store'])->name('repertoires_store');
+Route::get('/repertoires/{id}/edit', [RepertoiresController::class, 'edit'])->name('repertoires_edit');
+Route::put('/repertoires/{id}/update', [RepertoiresController::class, 'update'])->name('repertoires_update');
+Route::delete('/repertoires/{id}/destroy', [RepertoiresController::class, 'destroy'])->name('repertoires_destroy');
 

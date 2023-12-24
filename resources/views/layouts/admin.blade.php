@@ -120,6 +120,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('repertoires_index') }}" class="nav-link">
+              <i class="nav-icon far fa-calendar-alt"></i>
+              <p>
+                Repertoires
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
     </div>
