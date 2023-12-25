@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="{{ asset('resources/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
   <link rel="stylesheet" href="{{ asset('resources/plugins/daterangepicker/daterangepicker.css') }}">
   <link rel="stylesheet" href="{{ asset('resources/plugins/summernote/summernote-bs4.min.css') }}">
+  @vite('resources/css/app.css')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">

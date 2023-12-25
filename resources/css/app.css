@@ -1,0 +1,13 @@
+/* Tailwind directives */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    input {
+        @apply outline;
+        @apply outline-1;
+    }
+  
+  }
