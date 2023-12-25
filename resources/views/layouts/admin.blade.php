@@ -25,6 +25,15 @@
   </div>
 
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    @if (session('fail'))
+      <div class="w-full flex justify-center">
+          <p class=" text-center text-white bg-red-400 px-5 py-2 underline">{{ session('fail') }}</p>
+      </div>
+    @elseif (session('success')) 
+      <div class="w-full flex justify-center">
+        <p class=" text-center text-white bg-green-400 px-5 py-2 underline">{{ session('success') }}</p>
+      </div>
+    @endif
     <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -151,12 +160,6 @@
     </div>
 
     <section class="content">
-      @if (session('status'))
-        <div class="">
-            {{ session('status') }}
-        </div>
-      @endif
-
       @yield('page_content')
     </section>
   </div>

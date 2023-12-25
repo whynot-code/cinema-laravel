@@ -79,12 +79,12 @@ class CategoryController extends Controller
         if ($category->movies()->exists()) {
             return redirect()
                 ->route('categories')
-                ->with('status', 'Cannot delete Category beacuse contains Movies.');
+                ->with('fail', 'Cannot delete Category because contains Movies.');
         } 
 
         $category->delete();
         return redirect()
             ->route('categories')
-            ->with('status', 'Category deleted!');
+            ->with('success', 'Category deleted!');
     }
 }
