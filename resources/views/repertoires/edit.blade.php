@@ -39,10 +39,17 @@
             @enderror
         </label>
         <label>
-            <p>Data/Czas wyświetlenia</p>
-            <input type="datetime-local" name="display_datetime" value="{{ $repertoire->display_datetime }}">
-            @error('display_datetime') 
-                <p style="color: red; position: absolute; font-size: 10px;">{{ $errors->first('display_datetime') }}</p>
+            <p>Data</p>
+            <input type="date" name="display_date" value="{{ $repertoire->display_date }}">
+            @error('display_date') 
+                <p style="color: red; position: absolute; font-size: 10px;">{{ $errors->first('display_date') }}</p>
+            @enderror
+        </label>
+        <label>
+            <p>Czas wyświetlenia</p>
+            <input type="time" name="display_time" value="{{ $repertoire->display_time }}">
+            @error('display_time') 
+                <p style="color: red; position: absolute; font-size: 10px;">{{ $errors->first('display_time') }}</p>
             @enderror
         </label>
         <button type="submit">Edytuj</button>

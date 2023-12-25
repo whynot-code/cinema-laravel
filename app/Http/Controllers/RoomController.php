@@ -41,7 +41,7 @@ class RoomController extends Controller
 
         $room->save();
 
-        return redirect()-> route('rooms_index');
+        return redirect()->route('rooms_index');
     }
 
     /**

@@ -9,7 +9,6 @@ use App\Models\Repertoire;
 use App\Models\Room;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class RepertoiresController extends Controller
 {
@@ -18,8 +17,17 @@ class RepertoiresController extends Controller
      */
     public function index(): View
     {
-        $repertoires = Repertoire::all();
-        return view('repertoires.index', ['repertoires' => $repertoires]);
+        $repertoires = Repertoire::all()->sortBy('display_time');
+        $sorted_dates = Repertoire::all()
+                        ->pluck('display_date')
+                        ->unique()
+                        ->sort();
+        $rooms = Room::all();
+        return view('repertoires.index', [
+            'repertoires' => $repertoires,
+            'sorted_dates' => $sorted_dates,
+            'rooms' => $rooms
+        ]);
     }
 
     /**
@@ -39,7 +47,8 @@ class RepertoiresController extends Controller
 
         $repertoire->room_id = $request->input('room_id');
         $repertoire->movie_id = $request->input('movie_id');
-        $repertoire->display_datetime = $request->input('display_datetime');
+        $repertoire->display_time = $request->input('display_time');
+        $repertoire->display_date = $request->input('display_date');
 
         $repertoire->save();
 

@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('room_id');
             $table->unsignedBigInteger('movie_id');
-            $table->dateTime('display_datetime');
+            $table->time('display_time');
+            $table->date('display_date');
             $table->timestamps();
 
             $table->foreign('room_id')->references('id')->on('rooms');

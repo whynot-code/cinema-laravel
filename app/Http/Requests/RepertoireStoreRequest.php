@@ -24,7 +24,8 @@ class RepertoireStoreRequest extends FormRequest
         return [
             'room_id' => 'required',
             'movie_id' => 'required',
-            'display_datetime' => 'required',        
+            'display_time' => 'required',        
+            'display_date' => 'required',        
         ];
     }
 }
