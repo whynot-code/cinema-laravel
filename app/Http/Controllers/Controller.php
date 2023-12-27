@@ -9,4 +9,10 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
+
+    //Protecting routes if not logged in.
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['login', 'storeUser', 'authenticate']);
+    }
 }

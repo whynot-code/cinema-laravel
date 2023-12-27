@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\RepertoiresController;
@@ -27,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::view('/', 'welcome');
+Route::view('/', 'welcome')->middleware('auth');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
 Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories_create');
@@ -56,4 +57,10 @@ Route::post('/repertoires/store', [RepertoiresController::class, 'store'])->name
 Route::get('/repertoires/{id}/edit', [RepertoiresController::class, 'edit'])->name('repertoires_edit');
 Route::put('/repertoires/{id}/update', [RepertoiresController::class, 'update'])->name('repertoires_update');
 Route::delete('/repertoires/{id}/destroy', [RepertoiresController::class, 'destroy'])->name('repertoires_destroy');
+
+Route::get('/login', [AuthLoginController::class, 'login'])->name('login');
+Route::get('/login/store', [AuthLoginController::class, 'storeUser']);
+Route::get('/login/authenticate', [AuthLoginController::class, 'authenticate'])->name('authenticate');
+Route::get('/logout', [AuthLoginController::class, 'logout'])->name('logout');
+
 

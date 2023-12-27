@@ -82,7 +82,7 @@
           <img src="{{ asset('resources/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{ $currentUser }}</a>
         </div>
       </div>
 
@@ -139,6 +139,11 @@
             </a>
           </li>
         </ul>
+        <a class="m-32" href="{{ route('logout') }}">
+          <div class="p-2 border text-center hover:bg-gray-700">
+            Logout
+          </div>
+        </a>
       </nav>
     </div>
   </aside>
