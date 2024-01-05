@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\RepertoiresController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,5 +63,12 @@ Route::get('/login', [AuthLoginController::class, 'login'])->name('login');
 Route::get('/login/store', [AuthLoginController::class, 'storeUser']);
 Route::get('/login/authenticate', [AuthLoginController::class, 'authenticate'])->name('authenticate');
 Route::get('/logout', [AuthLoginController::class, 'logout'])->name('logout');
+
+Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations_index');
+Route::get('/reservations/create', [ReservationController::class, 'create'])->name('reservations_create');
+Route::post('/reservations/store', [ReservationController::class, 'store'])->name('reservations_store');
+Route::get('/reservations/{id}/edit', [ReservationController::class, 'edit'])->name('reservations_edit');
+Route::put('/reservations/{id}/update', [ReservationController::class, 'update'])->name('reservations_update');
+Route::delete('/reservations/{id}/destroy', [ReservationController::class, 'destroy'])->name('reservations_destroy');
 
 
