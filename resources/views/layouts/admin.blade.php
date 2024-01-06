@@ -146,6 +146,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('tickets_index') }}" class="nav-link">
+              <i class="nav-icon far fa-calendar-alt"></i>
+              <p>
+                Tickets
+              </p>
+            </a>
+          </li>
         </ul>
         <a class="m-32" href="{{ route('logout') }}">
           <div class="p-2 border text-center hover:bg-gray-700">

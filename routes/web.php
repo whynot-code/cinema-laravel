@@ -6,6 +6,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\RepertoiresController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -70,5 +71,12 @@ Route::post('/reservations/store', [ReservationController::class, 'store'])->nam
 Route::get('/reservations/{id}/edit', [ReservationController::class, 'edit'])->name('reservations_edit');
 Route::put('/reservations/{id}/update', [ReservationController::class, 'update'])->name('reservations_update');
 Route::delete('/reservations/{id}/destroy', [ReservationController::class, 'destroy'])->name('reservations_destroy');
+
+Route::get('/tickets', [TicketController::class, 'index'])->name('tickets_index');
+Route::get('/tickets/create', [TicketController::class, 'create'])->name('tickets_create');
+Route::post('/tickets/store', [TicketController::class, 'store'])->name('tickets_store');
+Route::get('/tickets/{id}/edit', [TicketController::class, 'edit'])->name('tickets_edit');
+Route::put('/tickets/{id}/update', [TicketController::class, 'update'])->name('tickets_update');
+Route::delete('/tickets/{id}/destroy', [TicketController::class, 'destroy'])->name('tickets_destroy');
 
 
