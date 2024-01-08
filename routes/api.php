@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\CategoryApiController;
+use App\Http\Controllers\Api\RegisterApiController;
 use App\Http\Controllers\AuthController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,8 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/categories', [CategoryApiController::class, 'index'])->name('categories_api');
-Route::get('/categories/{id}', [CategoryApiController::class, 'show'])->name('categories_show_api');
+Route::post('/register', [RegisterApiController::class, 'store'])->name('categories_store_api');
 
 Route::group([
 
