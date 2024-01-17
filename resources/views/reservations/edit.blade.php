@@ -5,13 +5,6 @@
         @csrf
         @method('PUT')
         <label>
-            <p>ID</p>
-                    <input name="uuid" type="text" value="{{ $reservation->uuid }}">
-            @error('uuid') 
-                <p style="color: red; position: absolute; font-size: 10px;">{{ $errors->first('uuid') }}</p>
-            @enderror
-        </label>
-        <label>
             <p>Użytkownik</p>
             <select name="user_id">
                 @foreach ($users as $user)

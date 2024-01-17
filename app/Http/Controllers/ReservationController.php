@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ReservationStoreRequest;
 use App\Http\Requests\ReservationUpdateRequest;
-use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use App\Models\Reservation;
 use App\Models\User;
 use App\Models\Repertoire;
 use App\Models\Room;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Str;
 
 class ReservationController extends Controller
 {
@@ -46,7 +46,7 @@ class ReservationController extends Controller
     {
         $reservation = new Reservation();
 
-        $reservation->uuid = $request->input('uuid');
+        $reservation->uuid = Str::random(16);
         $reservation->user_id = $request->input('user_id');
         $reservation->repertoire_id = $request->input('repertoire_id');
         $reservation->seats_number = $request->input('seats_number');
@@ -88,7 +88,6 @@ class ReservationController extends Controller
     {
         $reservation = Reservation::where('uuid', $id)
                                     ->update([
-                                        'uuid' => $request->input('uuid'),
                                         'user_id' => $request->input('user_id'),
                                         'repertoire_id' => $request->input('repertoire_id'),
                                         'seats_number' => $request->input('seats_number')

@@ -4,13 +4,6 @@
     <form action="{{ route('reservations_store') }}" method="POST">
         @csrf
         <label>
-            <p>ID</p>
-            <input name="uuid" type="text">
-        </label>
-        @error('uuid') 
-                <p style="color: red; position: absolute; font-size: 10px;">{{ $errors->first('uuid') }}</p>
-        @enderror
-        <label>
             <p>Użytkownik</p>
             <select name="user_id">
                 @foreach ($users as $user)
@@ -47,6 +40,6 @@
         @error('seats_number') 
                 <p style="color: red; position: absolute; font-size: 10px;">{{ $errors->first('seats_number') }}</p>
         @enderror
-        <button  type="submit">Dodaj rezerwację(disabled)</button>
+        <button type="submit">Dodaj rezerwację</button>
     </form>
 @endsection
