@@ -4,13 +4,7 @@
     <form action="{{ route('tickets_update', ['id' => $ticket->uuid]) }}" method="POST">
         @csrf
         @method('PUT')
-        <label>
-            <p>ID</p>
-                    <input name="uuid" type="text" value="{{ $ticket->uuid }}">
-            @error('uuid') 
-                <p style="color: red; position: absolute; font-size: 10px;">{{ $errors->first('uuid') }}</p>
-            @enderror
-        </label>
+
         <label>
             <p>Użytkownik</p>
             <select name="user_id">

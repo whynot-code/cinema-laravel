@@ -10,7 +10,7 @@ use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TicketController extends Controller
 {
@@ -47,7 +47,7 @@ class TicketController extends Controller
     public function store(TicketStoreRequest $request): RedirectResponse
     {
         $ticket = new Ticket();
-        $ticket->uuid = $request->input('uuid');
+        $ticket->uuid = Str::random(16);
         $ticket->user_id = $request->input('user_id');
         $ticket->repertoire_id = $request->input('repertoire_id');
         $ticket->seats_number = $request->input('seats_number');
@@ -82,7 +82,6 @@ class TicketController extends Controller
     {
         $ticket = Ticket::where('uuid', $id)
                                     ->update([
-                                        'uuid' => $request->input('uuid'),
                                         'user_id' => $request->input('user_id'),
                                         'repertoire_id' => $request->input('repertoire_id'),
                                         'seats_number' => $request->input('seats_number')

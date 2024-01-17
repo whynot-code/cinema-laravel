@@ -22,7 +22,6 @@ class TicketUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'uuid' => 'required|unique:reservations',
             'user_id' => 'required',
             'repertoire_id' => 'required',        
             'seats_number' => 'required',  
