@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TicketStoreRequest;
-use App\Http\Requests\TicketUpdateRequest;
-use App\Models\Repertoire;
-use App\Models\Room;
+use App\Models\Reservation;
 use App\Models\Ticket;
-use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class TicketController extends Controller
 {
@@ -30,63 +26,28 @@ class TicketController extends Controller
      */
     public function create(): View
     {
-        $users = User::all();
-        $repertoires = Repertoire::all();
-        $rooms = Room::all();
-        //Jak zaimplementować nasłuchiwanie na inpucie?????!!!!!!
+        $reservations = Reservation::all();
         return view('tickets.create', [
-            'users' => $users,
-            'repertoires' => $repertoires,
-            'rooms' => $rooms
+            'reservations' => $reservations,
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(TicketStoreRequest $request): RedirectResponse
+    public function store(Request $uuid)
     {
+        $reservation = Reservation::where('uuid', $uuid->uuid)->get()->first();
         $ticket = new Ticket();
-        $ticket->uuid = Str::random(16);
-        $ticket->user_id = $request->input('user_id');
-        $ticket->repertoire_id = $request->input('repertoire_id');
-        $ticket->seats_number = $request->input('seats_number');
+        $ticket->uuid = $reservation->uuid;
+        $ticket->user_id = $reservation->user_id;
+        $ticket->repertoire_id = $reservation->repertoire_id;
+        $ticket->seats_number = $reservation->seats_number;
+        
 
         $ticket->save();
+        Reservation::where('uuid', $uuid->uuid)->delete();
         
-        return redirect()->route('tickets_index');
-    }
-
-
-    /**
-     * Show the form for editing a new resource.
-     */
-    public function edit(string $id): View
-    {
-        $ticket = Ticket::where('uuid', $id)->get()->first();
-        $users = User::all();
-        $repertoires = Repertoire::all();
-        $rooms = Room::all();
-        return view('tickets.edit', [
-            'ticket' => $ticket,
-            'rooms' => $rooms,
-            'users' => $users,
-            'repertoires' => $repertoires 
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(TicketUpdateRequest $request, string $id): RedirectResponse
-    {
-        $ticket = Ticket::where('uuid', $id)
-                                    ->update([
-                                        'user_id' => $request->input('user_id'),
-                                        'repertoire_id' => $request->input('repertoire_id'),
-                                        'seats_number' => $request->input('seats_number')
-                                    ]);
-
         return redirect()->route('tickets_index');
     }
 

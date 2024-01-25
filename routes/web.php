@@ -75,8 +75,6 @@ Route::delete('/reservations/{id}/destroy', [ReservationController::class, 'dest
 Route::get('/tickets', [TicketController::class, 'index'])->name('tickets_index');
 Route::get('/tickets/create', [TicketController::class, 'create'])->name('tickets_create');
 Route::post('/tickets/store', [TicketController::class, 'store'])->name('tickets_store');
-Route::get('/tickets/{id}/edit', [TicketController::class, 'edit'])->name('tickets_edit');
-Route::put('/tickets/{id}/update', [TicketController::class, 'update'])->name('tickets_update');
 Route::delete('/tickets/{id}/destroy', [TicketController::class, 'destroy'])->name('tickets_destroy');
 
 

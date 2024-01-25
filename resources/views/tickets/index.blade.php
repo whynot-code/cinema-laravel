@@ -7,7 +7,7 @@
             <th>ID</th>
             <th>Użytkownik</th>
             <th>Repertuar</th>
-            <th>Miejsca</th>
+            <th>Miejsce</th>
             <th>Akcja</th>
         </thead>
         <tbody>
@@ -24,7 +24,6 @@
                     </td>
                     <td>{{ $ticket->seats_number }}</td>
                     <td>
-                        <a href="{{ route('tickets_edit', ['id' => $ticket->uuid ]) }}">Edytuj repertuar</a>
                         <form action="{{ route('tickets_destroy', ['id' => $ticket->uuid]) }}" method="POST">
                             @csrf
                             @method('DELETE')
