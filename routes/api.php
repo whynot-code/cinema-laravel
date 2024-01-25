@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/register', [RegisterApiController::class, 'store'])->name('categories_store_api');
+Route::post('/confirmreservation', [ConfirmReservationApiController::class, 'store'])->name('reservation_confirm_api');
 
 Route::group([
 
