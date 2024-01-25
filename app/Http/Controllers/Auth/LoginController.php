@@ -21,18 +21,6 @@ class LoginController extends Controller
         return redirect('/');
     }
 
-    public function storeUser() {
-
-        $user = new User();
-        $hashedPassword = Hash::make('1234');
-
-        $user->name = 'Patryk Seroka';
-        $user->email = 'root';
-        $user->password = $hashedPassword;
-        $user->save();
-
-    }
-
     public function authenticate(Request $request): RedirectResponse
     {
         
