@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ConfirmReservationApiController;
 use App\Http\Controllers\Api\RegisterApiController;
+use App\Http\Controllers\Api\ReservationApiController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/registeruser', [RegisterApiController::class, 'store'])->name('register_user_api');
 Route::post('/confirmreservation', [ConfirmReservationApiController::class, 'store'])->name('reservation_confirm_api');
+Route::post('/storereservation', [ReservationApiController::class, 'store'])->name('reservation_store_api');
 
 Route::group([
 
