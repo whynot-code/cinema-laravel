@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ReservationStoreRequest;
 use App\Http\Requests\ReservationUpdateRequest;
+use App\Models\Category;
 use Illuminate\Contracts\View\View;
 use App\Models\Reservation;
 use App\Models\User;
@@ -26,7 +27,7 @@ class ReservationController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         $users = User::all();
         $repertoires = Repertoire::all();
@@ -50,7 +51,11 @@ class ReservationController extends Controller
         $reservation->user_id = $request->input('user_id');
         $reservation->repertoire_id = $request->input('repertoire_id');
         $reservation->seats_number = $request->input('seats_number');
+        $available_seats = Reservation::reserveSeat($request->input('seats_number'), $reservation->repertoire->available_seats);
+        $repertoire = Repertoire::find($reservation->repertoire_id);
+        $repertoire->available_seats = $available_seats;
 
+        $repertoire->save();
         $reservation->save();
 
         return redirect()->route('reservations_index');
@@ -85,14 +90,19 @@ class ReservationController extends Controller
      * Update the specified resource in storage.
      */
     public function update(ReservationUpdateRequest $request, string $id): RedirectResponse
-    {
-        $reservation = Reservation::where('uuid', $id)
-                                    ->update([
-                                        'user_id' => $request->input('user_id'),
-                                        'repertoire_id' => $request->input('repertoire_id'),
-                                        'seats_number' => $request->input('seats_number')
-                                    ]);
+    {   
+        $reservation = Reservation::where('uuid', $id)->get()->first();
+        $repertoire = Repertoire::find($reservation->repertoire_id);
+        $available_seats = Reservation::retrieveSeat($reservation->seats_number, $reservation->repertoire->available_seats);
+        $available_seats = Reservation::reserveSeat($request->input('seats_number'), $available_seats);
+        $reservation->user_id = $request->input('user_id');
+        $reservation->repertoire_id = $request->input('repertoire_id');
+        $reservation->seats_number = $request->input('seats_number');
+        $repertoire->available_seats = $available_seats;
 
+        $repertoire->save();
+        $reservation->save();
+ 
         return redirect()->route('reservations_index');
     }
 
@@ -101,7 +111,12 @@ class ReservationController extends Controller
      */
     public function destroy(string $id): RedirectResponse
     {
-        $reservation = Reservation::where('uuid', $id);
+        $reservation = Reservation::where('uuid', $id)->get()->first();
+        $repertoire = Repertoire::find($reservation->repertoire_id);
+        $available_seats = Reservation::retrieveSeat($reservation->seats_number, $reservation->repertoire->available_seats);
+        
+        $repertoire->available_seats = $available_seats;
+        $repertoire->save();
 
         $reservation->delete();
 

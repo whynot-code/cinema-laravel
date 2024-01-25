@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('reservations', function (Blueprint $table) {
-            $table->string('uuid')->unique();
+            $table->string('uuid')->primary()->unique();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('repertoire_id');
             $table->unsignedBigInteger('seats_number');
