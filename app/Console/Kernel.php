@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Models\Repertoire;
 use App\Models\Reservation;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -26,6 +27,11 @@ class Kernel extends ConsoleKernel
 
                     if ($display_time_in_seconds <= $delete_time) 
                     {
+                        $available_seats = Reservation::retrieveSeat($reservation->seats_number, $reservation->repertoire->available_seats);
+                        $repertoire = Repertoire::find($reservation->repertoire_id);
+                        $repertoire->available_seats = $available_seats;
+                        $repertoire->save();
+                        
                         Reservation::where('uuid', $reservation->uuid)->delete();
                     }
                 }
