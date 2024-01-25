@@ -23,7 +23,7 @@
                             <tbody class=" bg-slate-200 p-4 ">
                                 <td>{{ $repertoire->movie->title }}</td>
                                 <td>{{ $repertoire->display_time }}</td>
-                                <td>{{ $repertoire->room->seats_number }}</td>
+                                <td>{{ count(json_decode($repertoire->available_seats, true)) }}</td>
                                 <td class=" font-bold ">
                                     <a class="hover:underline" href="{{ route('repertoires_edit', ['id' => $repertoire->id]) }}">Edytuj</a>
                                     <form 

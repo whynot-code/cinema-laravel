@@ -49,6 +49,8 @@ class RepertoiresController extends Controller
         $repertoire->movie_id = $request->input('movie_id');
         $repertoire->display_time = $request->input('display_time');
         $repertoire->display_date = $request->input('display_date');
+        $available_seats = Repertoire::makeSeatsArray($repertoire->room->seats_number);
+        $repertoire->available_seats = json_encode($available_seats);
 
         $repertoire->save();
 
