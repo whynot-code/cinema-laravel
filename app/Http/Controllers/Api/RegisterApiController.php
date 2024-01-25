@@ -20,9 +20,6 @@ class RegisterApiController extends Controller
         
         $user->save();
        
-        return redirect()->route('welcome')
-                    ->with('status', 'Successful!');    
-        
-        
+        return response('OK', 200)->header('User Registered', true);
     }
 }
