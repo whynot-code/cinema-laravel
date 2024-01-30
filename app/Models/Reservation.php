@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Support\Arr;
 
 class Reservation extends Model
@@ -25,6 +26,15 @@ class Reservation extends Model
         return $this->belongsTo(Repertoire::class);
     }
 
+    public function room(): HasOneThrough
+    {
+        return $this->hasOneThrough(Room::class, Repertoire::class);
+    }
+
+    public function movie(): HasOneThrough
+    {
+        return $this->hasOneThrough(Movie::class, Repertoire::class);
+    }
     /**
      * Reserve a seat.
      */
