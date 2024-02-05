@@ -82,7 +82,9 @@
           <img src="{{ asset('resources/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+          @if (Auth::user())
+            <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+          @endif
         </div>
       </div>
 

@@ -13,6 +13,6 @@ class Controller extends BaseController
     //Protecting routes if not logged in.
     public function __construct()
     {
-        $this->middleware('auth')->except(['login', 'storeUser', 'authenticate']);
+        // $this->middleware('auth')->except(['login', 'authenticate']);
     }
 }

@@ -21,6 +21,9 @@ class TicketPDFController extends Controller
             'owner' => $ticket->user->name,
             'uuid' => $ticket->uuid
         ];
-        return Pdf::loadView('tickets.PDF.pdf', $ticketData)->setPaper('a4', 'landscape');
+        Pdf::loadView('tickets.PDF.pdf', $ticketData)
+                ->setPaper('a4', 'landscape')
+                ->save(storage_path('mails/'.$ticket->user->name.'_'.$ticket->uuid.'.pdf'));
+        return 'mails/'.$ticket->user->name.'_'.$ticket->uuid.'.pdf';
     }
 }

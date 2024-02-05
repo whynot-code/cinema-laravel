@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\TicketPDFController;
+use App\Mail\TicketShipped;
 use App\Models\Reservation;
 use App\Models\Ticket;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ConfirmReservationApiController extends Controller
 {
@@ -23,14 +24,16 @@ class ConfirmReservationApiController extends Controller
         $ticket->repertoire_id = $reservation->repertoire_id;
         $ticket->seats_number = $reservation->seats_number;
         
-        $ticket->save();
+        // $ticket->save();
         
-        $pdf = TicketPDFController::create($ticket);
-        return $pdf->stream();
+        $pdfPatch = TicketPDFController::create($ticket);
+        Mail::to($reservation->user())->send(new TicketShipped($pdfPatch));
 
-        Reservation::where('uuid', $request->uuid)->delete();
 
-        return response('OK', 200)->header('Ticket generated', true);
+        // Reservation::where('uuid', $request->uuid)->delete();
+
+        return response('OK', 200)
+                    ->header('Ticket generated', true);
     }
 
 }
